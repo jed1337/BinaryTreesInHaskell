@@ -1,5 +1,5 @@
-data Tree = Leaf Int
-            | Node Int Tree Tree
+data Tree a= Leaf a
+            | Node a (Tree a) (Tree a)
             deriving (Show)
             
 leaf = Leaf 1
@@ -18,3 +18,5 @@ inOrder (Node value left right) = (inOrder left) ++ [value] ++ (inOrder right)
 
 postOrder (Leaf value) = [value]
 postOrder (Node value left right) = (postOrder left) ++ (postOrder right) ++ [value]
+
+-- question3 = 
