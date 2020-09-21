@@ -1,6 +1,6 @@
-data Tree a= Empty
-            | Node a (Tree a) (Tree a)
-            deriving (Show)
+data Tree a = Empty
+     | Node a (Tree a) (Tree a)
+     deriving (Eq, Ord, Show)
             
 leaf a = Node a Empty Empty
             
@@ -19,3 +19,9 @@ inOrder (Node value left right) = (inOrder left) ++ [value] ++ (inOrder right)
 
 postOrder (Empty) = []
 postOrder (Node value left right) = (postOrder left) ++ (postOrder right) ++ [value]
+
+insert (Empty) toInsert = Node toInsert Empty Empty
+insert (Node value left right) toInsert = 
+	if (toInsert<=value) 
+		then (Node value (insert left toInsert) right) 
+	else (Node value left (insert right toInsert))
