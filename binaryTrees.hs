@@ -1,22 +1,21 @@
-data Tree a= Leaf a
+data Tree a= Empty
             | Node a (Tree a) (Tree a)
             deriving (Show)
             
-leaf = Leaf 1
-tree3 = Node 2 (Leaf 1) (Leaf 3)
-tree7 = Node 4 (Node 2 (Leaf 1) (Leaf 3)) (Node 6 (Leaf 5) (Leaf 7))
-leftSkew = Node 4 (Node 3 (Node 2 (Leaf 1) (Leaf 0)) (Leaf 0)) (Leaf 0)
+leaf a = Node a Empty Empty
+            
+tree3 = Node 2 (leaf 1) (leaf 3)
+tree7 = Node 4 (Node 2 (leaf 1) (leaf 3)) (Node 6 (leaf 5) (leaf 7))
+leftSkew = Node 4 (Node 3 (Node 2 (leaf 1) Empty) Empty) Empty
 
-depth (Leaf _) = 0
+depth (Empty) = 0
 depth (Node _ left right) = 1+ max (depth left) (depth right)
 
-preOrder (Leaf value) = [value]
+preOrder (Empty) = []
 preOrder (Node value left right) = [value] ++ (preOrder left) ++ (preOrder right)
 
-inOrder (Leaf value) = [value]
+inOrder (Empty) = []
 inOrder (Node value left right) = (inOrder left) ++ [value] ++ (inOrder right)
 
-postOrder (Leaf value) = [value]
+postOrder (Empty) = []
 postOrder (Node value left right) = (postOrder left) ++ (postOrder right) ++ [value]
-
--- question3 = 
