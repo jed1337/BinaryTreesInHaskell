@@ -25,3 +25,12 @@ insert (Node value left right) toInsert =
 	if (toInsert<=value) 
 		then (Node value (insert left toInsert) right) 
 	else (Node value left (insert right toInsert))
+
+createBST [] = Empty
+createBST (x:xs) = createBST2 (Node x Empty Empty) xs
+	where
+		createBST2 tree [] = tree
+		createBST2 tree (x:xs) = createBST2 (insert tree x) xs
+
+createBST' tree [] = tree
+createBST' tree (x:xs) = createBST' (insert tree x) xs
